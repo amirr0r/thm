@@ -45,6 +45,13 @@ Then we can click on it to get more information about the techniques they used:
 
 ## CAR Knowledge Base
 
+<https://car.mitre.org/>
+
+The MITRE Cyber Analytics Repository (CAR) is a great place for finding analytics that takes us further than the Mitigation and Detection summaries in the ATT&CK® framework.
+
+>  **EQL** stands for Event Query Language. It's used to to query, parse, and organize Sysmon event data. <https://eql.readthedocs.io/en/latest/>
+
 ## Shield Active Defense
 
 ## ATT&CK® Emulation Plans
+
