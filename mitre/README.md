@@ -47,11 +47,21 @@ Then we can click on it to get more information about the techniques they used:
 
 <https://car.mitre.org/>
 
-The MITRE Cyber Analytics Repository (CAR) is a great place for finding analytics that takes us further than the Mitigation and Detection summaries in the ATT&CK® framework.
+The MITRE **Cyber Analytics Repository** (**CAR**) is a great place for finding analytics that takes us further than the Mitigation and Detection summaries in the ATT&CK® framework.
 
 >  **EQL** stands for Event Query Language. It's used to to query, parse, and organize Sysmon event data. <https://eql.readthedocs.io/en/latest/>
 
 ## Shield Active Defense
+
+<https://shield.mitre.org/>
+
+> The U.S. Department of Defense defines **active defense** as _"The employment of limited offensive action and counterattacks to deny a contested area or position to the enemy."_
+
+**Shield Active Defense** is similar to the **ATT&CK® Matrix**, but the tactics and techniques provided to us enable us to trap and/or engage (with) an adversary active within the network. 
+
+> Example: Plant the decoy credentials and monitor if / when they are used within the network, in order to be alert to the presence of the adversary
+
+- <https://shield.mitre.org/attack_mapping/mapping_all.html>
 
 ## ATT&CK® Emulation Plans
 
