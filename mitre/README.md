@@ -10,7 +10,6 @@
 
 ## Terminology
 
-- **Threat Intelligence**: investigative work (deduce from the victim what type of actor / entity is proceeding - establish a link between the victims - study of cyber attack campaigns trends).
 
 - **APT** (Advanced Persistent Threat): a team/group (**threat group**), or even a country (nation-state group), that engages in long-term attacks against organizations and/or countries.
 
@@ -22,6 +21,10 @@
     + **Tactic** &rarr; the adversary's goal or objective.
     + **Technique** &rarr; how the adversary achieves the goal or objective.
     + **Procedure** &rarr; how the technique is executed.
+
+- (Cyber) **Threat Intelligence** (**TI** or **CTI**): information, or TTPs, attributed to the adversary. Investigative work (deduce from the victim what type of actor / entity is proceeding - establish a link between the victims - study of cyber attack campaigns trends).
+
+> <https://www.crowdstrike.com/>
 
 ## ATT&CK® Framework
 
@@ -65,3 +68,24 @@ The MITRE **Cyber Analytics Repository** (**CAR**) is a great place for finding 
 
 ## ATT&CK® Emulation Plans
 
+<https://mitre-engenuity.org/>
+
+<https://medium.com/mitre-engenuity/introducing-the-all-new-adversary-emulation-plan-library-234b1d543f6b>
+
+<https://mitre-engenuity.org/ctid/>
+
+**CTID** (Center of Threat-Informed Defense) is an organization which consists of various companies/vendors who conduct research on cyber threats and their TTPs and share this research to improve cyber defense for all. 
+
+> Microsoft and Splunk are part of the CTID.
+
+**ATT&CK® Emulation Plans** are a step-by-step guide on how to mimic the specific threat group
+
+Currently, there are 3 ATT&CK® Emulation Plans available: 
+
+1. [**APT3**](https://attack.mitre.org/resources/adversary-emulation-plans/)
+2. [**APT29**](https://github.com/center-for-threat-informed-defense/adversary_emulation_library/tree/master/apt29)
+3. [**FIN6**](https://github.com/center-for-threat-informed-defense/adversary_emulation_library/tree/master/fin6)
+
+- <https://mitre-engenuity.org/attackevaluations/>
+- <https://github.com/mitre-attack/attack-arsenal>
+- <https://github.com/center-for-threat-informed-defense/adversary_emulation_library>
