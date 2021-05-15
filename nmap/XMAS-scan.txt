@@ -1,0 +1,7 @@
+# Nmap 7.91 scan initiated Sat May 15 14:58:42 2021 as: nmap -sX -p1-999 -oN XMAS-scan.txt -vv -Pn 10.10.245.63
+Nmap scan report for 10.10.245.63
+Host is up, received user-set.
+All 999 scanned ports on 10.10.245.63 are open|filtered because of 999 no-responses
+
+Read data files from: /usr/bin/../share/nmap
+# Nmap done at Sat May 15 15:02:03 2021 -- 1 IP address (1 host up) scanned in 201.54 seconds
