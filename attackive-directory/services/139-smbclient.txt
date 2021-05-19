@@ -1,0 +1,4 @@
+
+	Sharename       Type      Comment
+	---------       ----      -------
+SMB1 disabled -- no workgroup available

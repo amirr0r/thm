@@ -1,0 +1,4 @@
+[?2004hrpcclient $> [Krpcclient $> [3mspookysec[23m[K[3msrvinfo[23msrvinfo
+[?2004lCould not initialise srvsvc. Error was NT_STATUS_ACCESS_DENIED
+[?2004hrpcclient $> [?2004l
+

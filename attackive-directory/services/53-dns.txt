@@ -1,0 +1,9 @@
+
+; <<>> DiG 9.16.15-Debian <<>> axfr @10.10.193.110
+; (1 server found)
+;; global options: +cmd
+;; Query time: 4576 msec
+;; SERVER: 10.10.193.110#53(10.10.193.110)
+;; WHEN: Wed May 19 04:26:07 CEST 2021
+;; MSG SIZE  rcvd: 28
+

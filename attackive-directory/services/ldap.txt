@@ -1,0 +1,22 @@
+# extended LDIF
+#
+# LDAPv3
+# base <> (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts 
+#
+
+#
+dn:
+namingcontexts: DC=spookysec,DC=local
+namingcontexts: CN=Configuration,DC=spookysec,DC=local
+namingcontexts: CN=Schema,CN=Configuration,DC=spookysec,DC=local
+namingcontexts: DC=DomainDnsZones,DC=spookysec,DC=local
+namingcontexts: DC=ForestDnsZones,DC=spookysec,DC=local
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 2
+# numEntries: 1

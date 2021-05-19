@@ -1,0 +1,23 @@
+# Nmap 7.91 scan initiated Wed May 19 04:25:48 2021 as: nmap -min-rate 5000 --max-retries 1 -sV -oN attackive-directory.txt 10.10.193.110
+Warning: 10.10.193.110 giving up on port because retransmission cap hit (1).
+Nmap scan report for 10.10.193.110
+Host is up (0.034s latency).
+Not shown: 958 closed ports, 29 filtered ports
+PORT     STATE SERVICE       VERSION
+53/tcp   open  domain        Simple DNS Plus
+80/tcp   open  http          Microsoft IIS httpd 10.0
+88/tcp   open  kerberos-sec  Microsoft Windows Kerberos (server time: 2021-05-19 02:25:56Z)
+135/tcp  open  msrpc         Microsoft Windows RPC
+139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+389/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: spookysec.local0., Site: Default-First-Site-Name)
+445/tcp  open  microsoft-ds?
+464/tcp  open  kpasswd5?
+593/tcp  open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636/tcp  open  tcpwrapped
+3268/tcp open  ldap          Microsoft Windows Active Directory LDAP (Domain: spookysec.local0., Site: Default-First-Site-Name)
+3269/tcp open  tcpwrapped
+3389/tcp open  ms-wbt-server Microsoft Terminal Services
+Service Info: Host: ATTACKTIVEDIREC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed May 19 04:25:58 2021 -- 1 IP address (1 host up) scanned in 9.48 seconds
