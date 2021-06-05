@@ -1,0 +1,10 @@
+# Nmap 7.91 scan initiated Sat Jun  5 17:24:26 2021 as: nmap -sU -oN UDP-scan.txt 10.10.56.215
+Nmap scan report for 10.10.56.215
+Host is up (0.040s latency).
+Not shown: 997 closed ports
+PORT     STATE         SERVICE
+68/udp   open|filtered dhcpc
+111/udp  open|filtered rpcbind
+2049/udp open          nfs
+
+# Nmap done at Sat Jun  5 17:42:26 2021 -- 1 IP address (1 host up) scanned in 1080.24 seconds
