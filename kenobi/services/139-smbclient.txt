@@ -1,0 +1,7 @@
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	print$          Disk      Printer Drivers
+	anonymous       Disk      
+	IPC$            IPC       IPC Service (kenobi server (Samba, Ubuntu))
+SMB1 disabled -- no workgroup available

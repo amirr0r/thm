@@ -1,0 +1,14 @@
+# Nmap 7.91 scan initiated Thu Jun 10 17:23:05 2021 as: nmap -min-rate 5000 --max-retries 1 -oN ports.txt 10.10.94.124
+Nmap scan report for 10.10.94.124
+Host is up (0.035s latency).
+Not shown: 993 closed ports
+PORT     STATE SERVICE
+21/tcp   open  ftp
+22/tcp   open  ssh
+80/tcp   open  http
+111/tcp  open  rpcbind
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+2049/tcp open  nfs
+
+# Nmap done at Thu Jun 10 17:23:06 2021 -- 1 IP address (1 host up) scanned in 0.42 seconds
