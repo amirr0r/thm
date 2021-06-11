@@ -1,0 +1,75 @@
+# Nmap 7.91 scan initiated Thu Jun 10 22:17:00 2021 as: nmap -min-rate 5000 --max-retries 1 -sV -sC -p- -oN steel-mountain-full-port-scan.txt 10.10.225.219
+Warning: 10.10.225.219 giving up on port because retransmission cap hit (1).
+Nmap scan report for 10.10.225.219
+Host is up (0.039s latency).
+Not shown: 65499 closed ports
+PORT      STATE    SERVICE            VERSION
+80/tcp    open     http               Microsoft IIS httpd 8.5
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/8.5
+|_http-title: Site doesn't have a title (text/html).
+135/tcp   open     msrpc              Microsoft Windows RPC
+139/tcp   open     netbios-ssn        Microsoft Windows netbios-ssn
+445/tcp   open     microsoft-ds       Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+3389/tcp  open     ssl/ms-wbt-server?
+| ssl-cert: Subject: commonName=steelmountain
+| Not valid before: 2021-06-10T00:15:33
+|_Not valid after:  2021-12-10T00:15:33
+|_ssl-date: 2021-06-11T00:35:20+00:00; +4h16m57s from scanner time.
+5985/tcp  open     http               Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+8080/tcp  open     http               HttpFileServer httpd 2.3
+|_http-server-header: HFS 2.3
+|_http-title: HFS /
+12728/tcp filtered unknown
+14887/tcp filtered unknown
+17736/tcp filtered unknown
+20020/tcp filtered unknown
+21455/tcp filtered unknown
+36209/tcp filtered unknown
+37848/tcp filtered unknown
+38455/tcp filtered unknown
+40264/tcp filtered unknown
+41466/tcp filtered unknown
+41853/tcp filtered unknown
+42550/tcp filtered unknown
+46626/tcp filtered unknown
+47001/tcp open     http               Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+49152/tcp open     msrpc              Microsoft Windows RPC
+49153/tcp open     msrpc              Microsoft Windows RPC
+49154/tcp open     msrpc              Microsoft Windows RPC
+49155/tcp open     msrpc              Microsoft Windows RPC
+49156/tcp open     msrpc              Microsoft Windows RPC
+49163/tcp open     msrpc              Microsoft Windows RPC
+49164/tcp open     msrpc              Microsoft Windows RPC
+50815/tcp filtered unknown
+53430/tcp filtered unknown
+57851/tcp filtered unknown
+58759/tcp filtered unknown
+59896/tcp filtered unknown
+62855/tcp filtered unknown
+64750/tcp filtered unknown
+64988/tcp filtered unknown
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: 4h16m57s, deviation: 0s, median: 4h16m57s
+|_nbstat: NetBIOS name: STEELMOUNTAIN, NetBIOS user: <unknown>, NetBIOS MAC: 02:65:1c:80:ad:21 (unknown)
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2021-06-11T00:35:14
+|_  start_date: 2021-06-11T00:15:27
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Jun 10 22:18:23 2021 -- 1 IP address (1 host up) scanned in 83.04 seconds

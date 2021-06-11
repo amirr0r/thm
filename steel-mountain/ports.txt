@@ -1,0 +1,33 @@
+# Nmap 7.91 scan initiated Thu Jun 10 22:15:58 2021 as: nmap -min-rate 5000 --max-retries 1 -oN ports.txt 10.10.225.219
+Warning: 10.10.225.219 giving up on port because retransmission cap hit (1).
+Nmap scan report for 10.10.225.219
+Host is up (0.038s latency).
+Not shown: 975 closed ports
+PORT      STATE    SERVICE
+80/tcp    open     http
+135/tcp   open     msrpc
+139/tcp   open     netbios-ssn
+163/tcp   filtered cmip-man
+445/tcp   open     microsoft-ds
+1099/tcp  filtered rmiregistry
+1152/tcp  filtered winpoplanmess
+1443/tcp  filtered ies-lm
+1641/tcp  filtered invision
+2038/tcp  filtered objectmanager
+3324/tcp  filtered active-net
+3389/tcp  open     ms-wbt-server
+4567/tcp  filtered tram
+5080/tcp  filtered onscreen
+5190/tcp  filtered aol
+5925/tcp  filtered unknown
+8080/tcp  open     http-proxy
+9081/tcp  filtered cisco-aqos
+49152/tcp open     unknown
+49153/tcp open     unknown
+49154/tcp open     unknown
+49155/tcp open     unknown
+49156/tcp open     unknown
+49163/tcp open     unknown
+49176/tcp filtered unknown
+
+# Nmap done at Thu Jun 10 22:15:59 2021 -- 1 IP address (1 host up) scanned in 0.61 seconds
