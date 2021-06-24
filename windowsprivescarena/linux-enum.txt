@@ -1,0 +1,114 @@
+Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Thu Jun 24 17:27:32 2021
+
+ ========================== 
+|    Target Information    |
+ ========================== 
+Target ........... 10.10.107.239
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
+
+
+ ===================================================== 
+|    Enumerating Workgroup/Domain on 10.10.107.239    |
+ ===================================================== 
+[+] Got domain/workgroup name: WORKGROUP
+
+ ============================================= 
+|    Nbtstat Information for 10.10.107.239    |
+ ============================================= 
+Looking up status of 10.10.107.239
+	TCM-PC          <00> -         B <ACTIVE>  Workstation Service
+	WORKGROUP       <00> - <GROUP> B <ACTIVE>  Domain/Workgroup Name
+	TCM-PC          <20> -         B <ACTIVE>  File Server Service
+	WORKGROUP       <1e> - <GROUP> B <ACTIVE>  Browser Service Elections
+	WORKGROUP       <1d> -         B <ACTIVE>  Master Browser
+	..__MSBROWSE__. <01> - <GROUP> B <ACTIVE>  Master Browser
+
+	MAC Address = 02-27-4B-CB-6E-DD
+
+ ====================================== 
+|    Session Check on 10.10.107.239    |
+ ====================================== 
+[+] Server 10.10.107.239 allows sessions using username '', password ''
+
+ ============================================ 
+|    Getting domain SID for 10.10.107.239    |
+ ============================================ 
+Could not initialise lsarpc. Error was NT_STATUS_ACCESS_DENIED
+[+] Can't determine if host is part of domain or part of a workgroup
+
+ ======================================= 
+|    OS information on 10.10.107.239    |
+ ======================================= 
+[+] Got OS info for 10.10.107.239 from smbclient: 
+[+] Got OS info for 10.10.107.239 from srvinfo:
+Could not initialise srvsvc. Error was NT_STATUS_ACCESS_DENIED
+
+ ============================== 
+|    Users on 10.10.107.239    |
+ ============================== 
+[E] Couldn't find users using querydispinfo: NT_STATUS_ACCESS_DENIED
+
+[E] Couldn't find users using enumdomusers: NT_STATUS_ACCESS_DENIED
+
+ ========================================== 
+|    Share Enumeration on 10.10.107.239    |
+ ========================================== 
+
+	Sharename       Type      Comment
+	---------       ----      -------
+SMB1 disabled -- no workgroup available
+
+[+] Attempting to map shares on 10.10.107.239
+
+ ===================================================== 
+|    Password Policy Information for 10.10.107.239    |
+ ===================================================== 
+[E] Unexpected error from polenum:
+
+
+[+] Attaching to 10.10.107.239 using a NULL share
+
+[+] Trying protocol 139/SMB...
+
+	[!] Protocol failed: Cannot request session (Called Name:10.10.107.239)
+
+[+] Trying protocol 445/SMB...
+
+	[!] Protocol failed: SMB SessionError: STATUS_ACCESS_DENIED({Access Denied} A process has requested access to an object but has not been granted those access rights.)
+
+
+[E] Failed to get password policy with rpcclient
+
+
+ =============================== 
+|    Groups on 10.10.107.239    |
+ =============================== 
+
+[+] Getting builtin groups:
+
+[+] Getting builtin group memberships:
+
+[+] Getting local groups:
+
+[+] Getting local group memberships:
+
+[+] Getting domain groups:
+
+[+] Getting domain group memberships:
+
+ ======================================================================== 
+|    Users on 10.10.107.239 via RID cycling (RIDS: 500-550,1000-1050)    |
+ ======================================================================== 
+[E] Couldn't get SID: NT_STATUS_ACCESS_DENIED.  RID cycling not possible.
+
+ ============================================== 
+|    Getting printer info for 10.10.107.239    |
+ ============================================== 
+Could not initialise spoolss. Error was NT_STATUS_ACCESS_DENIED
+
+
+enum4linux complete on Thu Jun 24 17:27:37 2021
+

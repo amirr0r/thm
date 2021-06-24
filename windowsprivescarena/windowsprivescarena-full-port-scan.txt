@@ -1,0 +1,53 @@
+# Nmap 7.91 scan initiated Thu Jun 24 17:28:23 2021 as: nmap -min-rate 5000 --max-retries 1 -sV -sC -p- -oN windowsprivescarena-full-port-scan.txt 10.10.107.239
+Warning: 10.10.107.239 giving up on port because retransmission cap hit (1).
+Nmap scan report for 10.10.107.239
+Host is up (0.038s latency).
+Not shown: 59359 closed ports, 6163 filtered ports
+PORT      STATE SERVICE      VERSION
+135/tcp   open  msrpc        Microsoft Windows RPC
+139/tcp   open  netbios-ssn  Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds Windows 7 Professional 7601 Service Pack 1 microsoft-ds (workgroup: WORKGROUP)
+2869/tcp  open  http         Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+3389/tcp  open  tcpwrapped
+| ssl-cert: Subject: commonName=TCM-PC
+| Not valid before: 2021-06-23T15:39:40
+|_Not valid after:  2021-12-23T15:39:40
+|_ssl-date: 2021-06-24T15:44:11+00:00; +13m21s from scanner time.
+5357/tcp  open  http         Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Service Unavailable
+10243/tcp open  http         Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+49152/tcp open  msrpc        Microsoft Windows RPC
+49153/tcp open  msrpc        Microsoft Windows RPC
+49154/tcp open  msrpc        Microsoft Windows RPC
+49160/tcp open  msrpc        Microsoft Windows RPC
+49161/tcp open  msrpc        Microsoft Windows RPC
+49162/tcp open  msrpc        Microsoft Windows RPC
+Service Info: Host: TCM-PC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: 1h13m21s, deviation: 2h00m00s, median: 13m20s
+|_nbstat: NetBIOS name: TCM-PC, NetBIOS user: <unknown>, NetBIOS MAC: 02:27:4b:cb:6e:dd (unknown)
+| smb-os-discovery: 
+|   OS: Windows 7 Professional 7601 Service Pack 1 (Windows 7 Professional 6.1)
+|   OS CPE: cpe:/o:microsoft:windows_7::sp1:professional
+|   Computer name: TCM-PC
+|   NetBIOS computer name: TCM-PC\x00
+|   Workgroup: WORKGROUP\x00
+|_  System time: 2021-06-24T11:43:06-04:00
+| smb-security-mode: 
+|   account_used: <blank>
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2021-06-24T15:43:06
+|_  start_date: 2021-06-24T15:39:30
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Jun 24 17:30:57 2021 -- 1 IP address (1 host up) scanned in 154.15 seconds

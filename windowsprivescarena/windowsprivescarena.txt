@@ -1,0 +1,26 @@
+# Nmap 7.91 scan initiated Thu Jun 24 17:27:22 2021 as: nmap -min-rate 5000 --max-retries 1 -sV -oN windowsprivescarena.txt 10.10.107.239
+Warning: 10.10.107.239 giving up on port because retransmission cap hit (1).
+Nmap scan report for 10.10.107.239
+Host is up (0.041s latency).
+Not shown: 984 closed ports
+PORT      STATE    SERVICE      VERSION
+135/tcp   open     msrpc        Microsoft Windows RPC
+139/tcp   open     netbios-ssn  Microsoft Windows netbios-ssn
+445/tcp   open     microsoft-ds Microsoft Windows 7 - 10 microsoft-ds (workgroup: WORKGROUP)
+1433/tcp  filtered ms-sql-s
+2000/tcp  filtered cisco-sccp
+3801/tcp  filtered ibm-mgr
+3998/tcp  filtered dnx
+5357/tcp  open     http         Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+5431/tcp  filtered park-agent
+6000/tcp  filtered X11
+34571/tcp filtered unknown
+49152/tcp open     msrpc        Microsoft Windows RPC
+49153/tcp open     msrpc        Microsoft Windows RPC
+49154/tcp open     msrpc        Microsoft Windows RPC
+49160/tcp open     msrpc        Microsoft Windows RPC
+49161/tcp open     msrpc        Microsoft Windows RPC
+Service Info: Host: TCM-PC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Jun 24 17:28:23 2021 -- 1 IP address (1 host up) scanned in 60.81 seconds
