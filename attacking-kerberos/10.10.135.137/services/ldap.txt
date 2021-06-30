@@ -1,0 +1,22 @@
+# extended LDIF
+#
+# LDAPv3
+# base <> (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts 
+#
+
+#
+dn:
+namingcontexts: DC=CONTROLLER,DC=local
+namingcontexts: CN=Configuration,DC=CONTROLLER,DC=local
+namingcontexts: CN=Schema,CN=Configuration,DC=CONTROLLER,DC=local
+namingcontexts: DC=DomainDnsZones,DC=CONTROLLER,DC=local
+namingcontexts: DC=ForestDnsZones,DC=CONTROLLER,DC=local
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 2
+# numEntries: 1

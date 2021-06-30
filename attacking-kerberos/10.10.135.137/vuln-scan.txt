@@ -1,0 +1,32 @@
+# Nmap 7.91 scan initiated Tue Jun 29 17:32:37 2021 as: nmap -vvv --script vuln -oN vuln-scan.txt -Pn 10.10.135.137
+Nmap scan report for CONTROLLER.local (10.10.135.137)
+Host is up, received user-set (0.034s latency).
+Scanned at 2021-06-29 17:32:48 CEST for 38s
+Not shown: 987 closed ports
+Reason: 987 resets
+PORT     STATE SERVICE          REASON
+22/tcp   open  ssh              syn-ack ttl 127
+53/tcp   open  domain           syn-ack ttl 127
+88/tcp   open  kerberos-sec     syn-ack ttl 127
+135/tcp  open  msrpc            syn-ack ttl 127
+139/tcp  open  netbios-ssn      syn-ack ttl 127
+389/tcp  open  ldap             syn-ack ttl 127
+|_sslv2-drown: 
+445/tcp  open  microsoft-ds     syn-ack ttl 127
+464/tcp  open  kpasswd5         syn-ack ttl 127
+593/tcp  open  http-rpc-epmap   syn-ack ttl 127
+636/tcp  open  ldapssl          syn-ack ttl 127
+|_sslv2-drown: 
+3268/tcp open  globalcatLDAP    syn-ack ttl 127
+3269/tcp open  globalcatLDAPssl syn-ack ttl 127
+|_sslv2-drown: 
+3389/tcp open  ms-wbt-server    syn-ack ttl 127
+|_sslv2-drown: 
+
+Host script results:
+|_samba-vuln-cve-2012-1182: Could not negotiate a connection:SMB: Failed to receive bytes: ERROR
+|_smb-vuln-ms10-054: false
+|_smb-vuln-ms10-061: Could not negotiate a connection:SMB: Failed to receive bytes: ERROR
+
+Read data files from: /usr/bin/../share/nmap
+# Nmap done at Tue Jun 29 17:33:26 2021 -- 1 IP address (1 host up) scanned in 48.64 seconds
