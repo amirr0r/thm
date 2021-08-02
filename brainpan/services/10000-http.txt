@@ -1,0 +1,22 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: services/10000-http.txt
+START_TIME: Sun Aug  1 18:09:55 2021
+URL_BASE: http://10.10.161.202:10000/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://10.10.161.202:10000/ ----
++ http://10.10.161.202:10000/bin (CODE:301|SIZE:0)
++ http://10.10.161.202:10000/index.html (CODE:200|SIZE:215)
+
+-----------------
+END_TIME: Sun Aug  1 18:15:39 2021
+DOWNLOADED: 4612 - FOUND: 2

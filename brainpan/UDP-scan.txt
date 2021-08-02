@@ -1,0 +1,1 @@
+# Nmap 7.91 scan initiated Sun Aug  1 18:02:05 2021 as: nmap -sU -oN UDP-scan.txt 10.10.161.202
